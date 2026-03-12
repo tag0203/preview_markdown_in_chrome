@@ -9,6 +9,16 @@
 
   document.body.style.visibility = 'hidden';
 
+  // Disable raw HTML blocks: escape them instead of passing through as-is.
+  // Without this, <script> or <img onerror=...> in the markdown would execute.
+  marked.use({
+    renderer: {
+      html({ text }) {
+        return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+    }
+  });
+
   const html = marked.parse(rawMarkdown);
 
   const firstH1 = html.match(/<h1[^>]*>(.*?)<\/h1>/i);
@@ -20,8 +30,10 @@
 
   document.head.innerHTML =
     '<meta charset="utf-8">' +
-    '<meta name="viewport" content="width=device-width, initial-scale=1">' +
-    '<title>' + titleText + '</title>';
+    '<meta name="viewport" content="width=device-width, initial-scale=1">';
+  const titleEl = document.createElement('title');
+  titleEl.textContent = titleText;
+  document.head.appendChild(titleEl);
 
   document.body.innerHTML = '<article class="markdown-body">' + html + '</article>';
 
