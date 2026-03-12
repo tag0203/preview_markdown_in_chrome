@@ -24,5 +24,11 @@
     '<title>' + titleText + '</title>';
 
   document.body.innerHTML = '<article class="markdown-body">' + html + '</article>';
+
+  document.querySelectorAll('.markdown-body a').forEach(function (a) {
+    a.target = '_blank';
+    a.rel = 'noreferrer noopener';
+  });
+
   document.body.style.visibility = '';
 })();
