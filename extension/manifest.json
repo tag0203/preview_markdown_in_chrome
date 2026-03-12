@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Markdown Preview",
+  "version": "1.0.0",
+  "description": "Render local .md files as HTML in the browser",
+  "content_scripts": [
+    {
+      "matches": ["file://*"],
+      "js": ["lib/marked.min.js", "content.js"],
+      "css": ["style.css"],
+      "run_at": "document_end",
+      "match_origin_as_fallback": true
+    }
+  ]
+}

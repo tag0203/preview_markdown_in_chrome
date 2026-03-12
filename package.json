@@ -1,0 +1,11 @@
+{
+  "name": "preview-markdown-in-chrome",
+  "version": "1.0.0",
+  "description": "Chrome/Vivaldi extension to preview local .md files as HTML",
+  "scripts": {
+    "postinstall": "cp node_modules/marked/marked.min.js extension/lib/marked.min.js"
+  },
+  "dependencies": {
+    "marked": "^15.0.0"
+  }
+}
